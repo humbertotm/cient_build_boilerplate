@@ -1,0 +1,27 @@
+{
+  "name": "client-build-boilerplate",
+  "version": "1.0.0",
+  "description": "Build boilerplate for SPA with webpack, reac, and sass.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humbertotm/cient_build_boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/humbertotm/cient_build_boilerplate/issues"
+  },
+  "homepage": "https://github.com/humbertotm/cient_build_boilerplate#readme",
+  "dependencies": {
+    "inuitcss": "file:node_modules/inuitcss",
+    "node-sass": "^4.9.3",
+    "webpack": "^4.20.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.1.9"
+  }
+}
