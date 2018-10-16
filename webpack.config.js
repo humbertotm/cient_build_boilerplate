@@ -1,21 +1,58 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.export = {
+  mode: "development",
   entry: {
-    main: 'src/index.js'
+    main: "src/index.js"
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'static')
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
+    publicPath: "/"
+  },
+  devServer: {
+    publicPath: path.join(__dirname, "/"),
+    contentBase: path.join(__dirname, 'dist')
   },
   module: {
-    rules: []
-  }
+    rules: [
+      {
+        test: /\.js?$/,
+        include: [
+          path.resolve(__dirname, "src")
+        ],
+        use: [
+          { loader: "@babel/core" },
+          { loader: "babel-loader" },
+          { loader: "@babel/preset-env" },
+          { loader: "@babel/preset-react" }
+        ]
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader"
+      },
+      {
+        test: /\.scss?$/,
+        include: [
+          // path.resolve(__dirname, 'node_modules'),
+          path.resolve(__dirname, "styles")
+        ],
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: "SomeShit",
+      template: "./src/index.html"
+    })
+  ]
 }
-
-/*
-* Add loaders for jsx, js. Transpile with babel, es2015 preset.
-* Add loader for sass. Will inject css through a link tag in the index.html template.
-* Add copy files plugin to copy fonts, and assets into build dir.
-* Add hot module replacement plug in for hot module reloading.
-*/
